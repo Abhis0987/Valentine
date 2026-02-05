@@ -1,34 +1,52 @@
 let step = 0;
 
-const days = [
-  "🌹 Happy Rose Day, My Love",
-  "💍 Will you be mine forever?",
-  "🍫 Chocolate for you (I ate half 😋)",
-  "🧸 You are my favourite teddy",
-  "🤞 I promise to stay with you always",
-  "🤗 A warm hug just for you",
-  "❤️ Happy Valentine’s Day Madam Ji"
+const scenes = [
+  { text: "🌹 Happy Rose Day, My Love", emojis: ["🌹","💐","❤️"], bg: "linear-gradient(135deg,#ff9a9e,#fad0c4)" },
+  { text: "💍 Will you be mine forever?", emojis: ["💍","🥰","❤️"], bg: "linear-gradient(135deg,#fbc2eb,#a6c1ee)" },
+  { text: "🍫 Chocolate for you (I ate half 😋)", emojis: ["🍫","😋","❤️"], bg: "linear-gradient(135deg,#d1913c,#ffd194)" },
+  { text: "🧸 You are my favourite teddy", emojis: ["🧸","💕","❤️"], bg: "linear-gradient(135deg,#fbc8d4,#9795f0)" },
+  { text: "😘 A sweet kiss just for you", emojis: ["😘","💋","❤️"], bg: "linear-gradient(135deg,#ff758c,#ff7eb3)" },
+  { text: "🤗 A warm hug for you", emojis: ["🤗","💞","❤️"], bg: "linear-gradient(135deg,#a18cd1,#fbc2eb)" },
+  { text: "❤️ Happy Valentine’s Day Madam Ji", emojis: ["❤️","💖","💘"], bg: "linear-gradient(135deg,#ff416c,#ff4b2b)" }
 ];
 
-// YES click
 function yesClicked() {
   document.getElementById("buttons").style.display = "none";
   document.getElementById("nextBtn").style.display = "inline-block";
-  document.getElementById("title").innerText = days[0];
+  updateScene();
 }
 
-// Next message
 function nextPage() {
   step++;
-  if (step < days.length) {
-    document.getElementById("title").innerText = days[step];
+  if (step < scenes.length) {
+    updateScene();
   } else {
     document.getElementById("title").innerText = "I Love You Forever ❤️";
     document.getElementById("nextBtn").style.display = "none";
+    burstEmojis(["💖","💘","❤️","🥰"]);
   }
 }
 
-// NO button prank
+function updateScene() {
+  const scene = scenes[step];
+  document.getElementById("title").innerText = scene.text;
+  document.body.style.background = scene.bg;
+  burstEmojis(scene.emojis);
+}
+
+function burstEmojis(emojis) {
+  const container = document.getElementById("emoji-container");
+  for (let i = 0; i < 12; i++) {
+    const e = document.createElement("div");
+    e.className = "emoji";
+    e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.top = Math.random() * 80 + "vh";
+    container.appendChild(e);
+    setTimeout(() => e.remove(), 1200);
+  }
+}
+
 function moveNo() {
   const btn = document.getElementById("noBtn");
   btn.style.position = "absolute";
@@ -36,23 +54,16 @@ function moveNo() {
   btn.style.left = Math.random() * 80 + "%";
 }
 
-// Music play
 function playMusic() {
   document.getElementById("bgMusic").play();
 }
 
-// Create floating hearts
-const heartContainer = document.getElementById("heart-container");
-
+// Floating hearts continuously
 setInterval(() => {
   const heart = document.createElement("div");
-  heart.classList.add("heart");
+  heart.className = "heart";
   heart.innerText = "❤️";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
-  heartContainer.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 10000);
-}, 300);
+  document.getElementById("heart-container").appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}, 400);
