@@ -1,53 +1,74 @@
-body {
+/* Reset */
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+}
+
+/* Body */
+body {
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-family: 'Comic Sans MS', cursive;
-  overflow: hidden;
+  justify-content: center;
   transition: background 1s ease;
 }
 
+/* Music Button */
 #musicBtn {
   position: fixed;
   top: 15px;
   right: 15px;
+  z-index: 100;
   background: #ff4d6d;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 10px 14px;
-  border-radius: 20px;
+  padding: 10px 16px;
+  border-radius: 25px;
   cursor: pointer;
-  z-index: 10;
+  font-size: 14px;
+}
+
+/* Card */
+.card {
+  background: rgba(255, 240, 245, 0.95);
+  padding: 30px 20px;
+  width: 330px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 5;
 }
 
 /* Name animation */
 .name {
   font-size: 34px;
   color: #ff3366;
+  margin-bottom: 10px;
   animation: heartbeat 1.5s infinite;
-  text-shadow: 0 0 10px pink;
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
 }
 
 @keyframes heartbeat {
   0% { transform: scale(1); }
   30% { transform: scale(1.1); }
   60% { transform: scale(1); }
+  100% { transform: scale(1); }
 }
 
-/* Card */
-.card {
-  background: rgba(255, 240, 245, 0.95);
-  padding: 30px;
-  border-radius: 25px;
-  text-align: center;
-  width: 330px;
-  box-shadow: 0 20px 35px rgba(0,0,0,0.3);
-  z-index: 2;
+/* Title text */
+#title {
+  font-size: 18px;
+  margin: 12px 0 20px;
+  color: #333;
 }
 
+/* Buttons */
 button {
   background: #ff4d6d;
   color: white;
@@ -59,18 +80,34 @@ button {
   margin: 6px;
 }
 
-#nextBtn { display: none; }
+button:hover {
+  opacity: 0.9;
+}
+
+/* Next Button */
+#nextBtn {
+  display: none;
+  margin-top: 15px;
+}
 
 /* Floating hearts */
 .heart {
   position: fixed;
-  bottom: -20px;
+  bottom: -30px;
   font-size: 22px;
-  animation: floatUp 8s linear infinite;
+  animation: floatUp 8s linear forwards;
+  z-index: 1;
 }
 
 @keyframes floatUp {
-  to { transform: translateY(-110vh); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
 }
 
 /* Emoji burst */
@@ -78,29 +115,47 @@ button {
   position: fixed;
   font-size: 30px;
   animation: burst 1.2s ease-out forwards;
+  z-index: 4;
 }
 
 @keyframes burst {
-  to { transform: translateY(-120px) scale(1.5); opacity: 0; }
+  from {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120px) scale(1.5);
+    opacity: 0;
+  }
 }
 
-/* Love letter popup */
+/* Love Letter Popup */
 #letterPopup {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: none;
-  justify-content: center;
   align-items: center;
-  z-index: 20;
+  justify-content: center;
+  z-index: 200;
 }
 
 .letter {
   background: #fff0f5;
   padding: 25px;
-  border-radius: 20px;
   width: 300px;
+  border-radius: 20px;
   text-align: center;
+}
+
+.letter h3 {
+  margin-bottom: 10px;
+}
+
+.letter p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
 }
 
 /* Fireworks */
@@ -108,8 +163,16 @@ button {
   position: fixed;
   font-size: 26px;
   animation: firework 1.5s ease-out forwards;
+  z-index: 3;
 }
 
 @keyframes firework {
-  to { transform: translateY(-150px) scale(2); opacity: 0; }
+  from {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-150px) scale(2);
+    opacity: 0;
+  }
 }
