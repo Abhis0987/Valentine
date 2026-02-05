@@ -1,11 +1,9 @@
-/* Reset */
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-/* Body */
 body {
   width: 100vw;
   height: 100vh;
@@ -13,59 +11,47 @@ body {
   font-family: "Comic Sans MS", cursive, sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   transition: background 1s ease;
 }
 
-/* Music Button */
 #musicBtn {
   position: fixed;
   top: 15px;
   right: 15px;
   z-index: 100;
   background: #ff4d6d;
-  color: #fff;
+  color: white;
   border: none;
   padding: 10px 16px;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 14px;
 }
 
 /* Card */
 .card {
   background: rgba(255, 240, 245, 0.95);
-  padding: 30px 20px;
+  padding: 30px;
   width: 330px;
   border-radius: 25px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 5;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
 /* Name animation */
 .name {
   font-size: 34px;
   color: #ff3366;
-  margin-bottom: 10px;
   animation: heartbeat 1.5s infinite;
-  text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+  text-shadow: 0 0 12px pink;
 }
 
 @keyframes heartbeat {
   0% { transform: scale(1); }
   30% { transform: scale(1.1); }
   60% { transform: scale(1); }
-  100% { transform: scale(1); }
-}
-
-/* Title text */
-#title {
-  font-size: 18px;
-  margin: 12px 0 20px;
-  color: #333;
 }
 
 /* Buttons */
@@ -80,11 +66,6 @@ button {
   margin: 6px;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-/* Next Button */
 #nextBtn {
   display: none;
   margin-top: 15px;
@@ -94,17 +75,13 @@ button:hover {
 .heart {
   position: fixed;
   bottom: -30px;
-  font-size: 22px;
+  font-size: 26px;
   animation: floatUp 8s linear forwards;
   z-index: 1;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
+  to {
     transform: translateY(-120vh);
     opacity: 0;
   }
@@ -115,28 +92,23 @@ button:hover {
   position: fixed;
   font-size: 30px;
   animation: burst 1.2s ease-out forwards;
-  z-index: 4;
 }
 
 @keyframes burst {
-  from {
-    transform: scale(0.5);
-    opacity: 1;
-  }
   to {
     transform: translateY(-120px) scale(1.5);
     opacity: 0;
   }
 }
 
-/* Love Letter Popup */
+/* Love Letter */
 #letterPopup {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   display: none;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 200;
 }
 
@@ -148,29 +120,14 @@ button:hover {
   text-align: center;
 }
 
-.letter h3 {
-  margin-bottom: 10px;
-}
-
-.letter p {
-  font-size: 14px;
-  color: #444;
-  line-height: 1.5;
-}
-
 /* Fireworks */
 .fire {
   position: fixed;
-  font-size: 26px;
+  font-size: 28px;
   animation: firework 1.5s ease-out forwards;
-  z-index: 3;
 }
 
 @keyframes firework {
-  from {
-    transform: scale(0.5);
-    opacity: 1;
-  }
   to {
     transform: translateY(-150px) scale(2);
     opacity: 0;
