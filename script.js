@@ -1,11 +1,11 @@
 let step = 0;
 
 const scenes = [
-  { text: "🌹 Happy Rose Day, Baacha", emojis: ["🌹","❤️"], bg: "linear-gradient(135deg,#ff9a9e,#fad0c4)" },
-  { text: "💍 Will you be mine forever?", emojis: ["💍","🥰"], bg: "linear-gradient(135deg,#fbc2eb,#a6c1ee)" },
-  { text: "🍫 Chocolate Day for my sweet Baacha", emojis: ["🍫","😋"], bg: "linear-gradient(135deg,#d1913c,#ffd194)" },
-  { text: "😘 A kiss full of love", emojis: ["😘","💋"], bg: "linear-gradient(135deg,#ff758c,#ff7eb3)" },
-  { text: "❤️ Happy Valentine’s Day Baacha ❤️", emojis: ["❤️","💖","💘"], bg: "linear-gradient(135deg,#ff416c,#ff4b2b)", fireworks: true, letter: true },
+  { text: "🌹 Happy Rose Day, Baacha", emojis: ["🌹","❤️"] },
+  { text: "💍 Will you be mine forever?", emojis: ["💍","🥰"] },
+  { text: "🍫 Chocolate Day for my sweet Baacha", emojis: ["🍫","😋"] },
+  { text: "😘 A kiss full of love", emojis: ["😘","💋"] },
+  { text: "❤️ Happy Valentine’s Day Baacha ❤️", emojis: ["❤️","💖","💘"], fireworks: true, letter: true },
   { text: "💍 Will you marry me, Baacha?", proposal: true }
 ];
 
@@ -21,21 +21,20 @@ function nextPage() {
 }
 
 function updateScene() {
-  const scene = scenes[step];
-  document.getElementById("title").innerText = scene.text || "";
-  document.body.style.background = scene.bg || document.body.style.background;
+  const s = scenes[step];
+  document.getElementById("title").innerText = s.text || "";
 
-  if (scene.emojis) burstEmojis(scene.emojis);
-  if (scene.fireworks) startFireworks();
-  if (scene.letter) showLetter();
-  if (scene.proposal) showProposal();
+  if (s.emojis) burstEmojis(s.emojis);
+  if (s.fireworks) startFireworks();
+  if (s.letter) showLetter();
+  if (s.proposal) showProposal();
 }
 
-function burstEmojis(emojis) {
+function burstEmojis(arr) {
   for (let i = 0; i < 10; i++) {
     const e = document.createElement("div");
     e.className = "emoji";
-    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    e.innerText = arr[Math.floor(Math.random()*arr.length)];
     e.style.left = Math.random()*100+"vw";
     e.style.top = Math.random()*80+"vh";
     document.body.appendChild(e);
@@ -56,36 +55,60 @@ function startFireworks() {
 }
 
 function showLetter() {
-  setTimeout(()=> {
-    document.getElementById("letterPopup").style.display = "flex";
+  setTimeout(()=>{
+    document.getElementById("letterPopup").style.display="flex";
   }, 1200);
 }
 
 function closeLetter() {
-  document.getElementById("letterPopup").style.display = "none";
+  document.getElementById("letterPopup").style.display="none";
 }
 
 function showProposal() {
   document.getElementById("buttons").innerHTML = `
-    <button onclick="alert('She said YES 💖😭')">YES 💍</button>
+    <button onclick="finalYes()">YES 💍</button>
     <button id="noBtn" onmouseover="moveNo()">NO 😈</button>
   `;
-  document.getElementById("buttons").style.display = "block";
-  document.getElementById("nextBtn").style.display = "none";
+  document.getElementById("buttons").style.display="block";
+  document.getElementById("nextBtn").style.display="none";
+}
+
+function finalYes() {
+  document.body.style.background = "linear-gradient(135deg,#ff0844,#ffb199)";
+  document.getElementById("buttons").style.display="none";
+
+  document.getElementById("title").innerHTML = `
+    💖 She said YES 💖<br><br>
+    <span style="font-size:16px">
+      From today till forever,<br>
+      my heart is yours, Baacha 💍<br><br>
+      I promise love, respect,<br>
+      and a lifetime of happiness ❤️
+    </span>
+  `;
+
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText=["❤️","💖","💍","💘"][Math.floor(Math.random()*4)];
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  },200);
 }
 
 function moveNo() {
-  const btn = document.getElementById("noBtn");
-  btn.style.position = "absolute";
-  btn.style.top = Math.random()*80+"%";
-  btn.style.left = Math.random()*80+"%";
+  const btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
 }
 
 function playMusic() {
   document.getElementById("bgMusic").play();
 }
 
-/* Floating hearts */
+/* Floating hearts always */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
@@ -93,4 +116,4 @@ setInterval(()=>{
   h.style.left=Math.random()*100+"vw";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
-},400);
+},500);
